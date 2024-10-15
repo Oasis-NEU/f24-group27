@@ -23,11 +23,15 @@ a:hover {
 }
 
 body {
+  background-color: #f4f4f4; /* Light grey background for a professional look */
   margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure the page takes full height */
+  overflow: hidden; /* Avoid scrollbars */
 }
 
 h1 {

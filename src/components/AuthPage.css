@@ -1,0 +1,15 @@
+/* src/components/Login.css */
+form {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  a {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

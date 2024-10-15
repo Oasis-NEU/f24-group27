@@ -1,0 +1,33 @@
+/* src/components/Title.css */
+.title {
+  font-size: 48px;
+  color: #007bff;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  overflow: hidden; /* Ensures no content goes outside the container */
+  white-space: nowrap;
+  border-right: 4px solid #007bff; /* Blinking cursor effect */
+  width: 10ch; /* Match the length of the text for smooth typing */
+  animation: typing 5s steps(12) 1s infinite, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  0% {
+    width: 0; /* Start with no text */
+  }
+  50% {
+    width: 10ch; /* Full text is displayed */
+  }
+  100% {
+    width: 0; /* Text erased */
+  }
+}
+
+@keyframes blink {
+  100% {
+    border-color: transparent; /* Blinking effect */
+  }
+}
+
+

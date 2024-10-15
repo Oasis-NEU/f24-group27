@@ -1,0 +1,38 @@
+/* src/components/FormGroup.css */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Add space between form groups */
+  }
+  
+  .form-group label {
+    margin-bottom: 6px; /* Space between label and input */
+    font-weight: 500;
+    font-size: 14px;
+    color: #333; /* Dark grey color for readability */
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .form-group input:hover {
+    background-color: #f1f1f1;
+    border-color: #bbb;
+  }
+  
+  .form-group input:focus {
+    background-color: #fff;
+    border-color: #007bff;
+    outline: none;
+  }
+  
