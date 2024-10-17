@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Title from './Title';
 import FormGroup from './FormGroup';
 import Checkbox from './Checkbox';
-import supabase from '../config/supabaseClient';
 import './Login.css';
 
 const AuthPage = () => {
