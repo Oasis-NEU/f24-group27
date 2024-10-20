@@ -1,18 +1,55 @@
-// src/components/AuthPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Title from './Title';
 import FormGroup from './FormGroup';
 import Checkbox from './Checkbox';
-import supabase from '../config/supabaseClient';
-import './Login.css';
+import intlTelInput from 'intl-tel-input';
+import 'intl-tel-input/build/css/intlTelInput.css';
+import './Login.css'; // Your existing styles
 
 const AuthPage = () => {
-  const [showRegister, setShowRegister] = useState(false); // Toggle views
+  const [showRegister, setShowRegister] = useState(false); // Track register mode
+  const [isForgotPassword, setIsForgotPassword] = useState(false); // Track forgot password mode
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const phoneInputRef = useRef(null); // Reference for the phone input field
+  const itiInstance = useRef(null);   // Store the intlTelInput instance
+
+  // Initialize intl-tel-input when the Register view is shown
+  useEffect(() => {
+    if (showRegister && phoneInputRef.current) {
+      itiInstance.current = intlTelInput(phoneInputRef.current, {
+        initialCountry: 'auto',
+        geoIpLookup: (callback) => {
+          fetch('https://ipinfo.io?token=<YOUR_TOKEN>')
+            .then((response) => response.json())
+            .then((data) => {
+              const countryCode = data.country ? data.country : 'us';
+              callback(countryCode);
+            });
+        },
+        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
+      });
+
+      // Event listener for country change
+      phoneInputRef.current.addEventListener('countrychange', function () {
+        const selectedCountryData = itiInstance.current.getSelectedCountryData();
+        const prefix = selectedCountryData.dialCode;
+        phoneInputRef.current.value = `+${prefix} `;
+      });
+
+      // Cleanup: destroy the `intl-tel-input` instance when the component unmounts or the view changes
+      return () => {
+        if (itiInstance.current) {
+          itiInstance.current.destroy();
+          itiInstance.current = null; // Clear the instance
+        }
+      };
+    }
+  }, [showRegister]); // Run this effect when `showRegister` changes
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -28,11 +65,35 @@ const AuthPage = () => {
     alert(`Account created for ${username} with phone: ${phone}`);
   };
 
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    alert(`Password reset link sent to: ${email}`);
+  };
+
   return (
     <div className="login-container">
       <Title />
 
-      {showRegister ? (
+      {isForgotPassword ? (
+        // Forgot Password View
+        <form onSubmit={handleForgotPassword}>
+          <FormGroup
+            label="Email"
+            type="email"
+            id="forgot-password-email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button type="submit" className="login-btn">
+            Send Reset Link
+          </button>
+          <div className="create-account">
+            <a onClick={() => setIsForgotPassword(false)}>Back to Login</a> {/* Go back to login */}
+          </div>
+        </form>
+      ) : showRegister ? (
+        // Register View
         <form onSubmit={handleRegister}>
           <FormGroup
             label="Email"
@@ -42,15 +103,16 @@ const AuthPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <FormGroup
-            label="Phone Number"
-            type="tel"
-            id="register-phone"
-            name="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="123-456-7890"
-          />
+          <div className="form-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input
+              ref={phoneInputRef}
+              type="tel"
+              id="register-phone"
+              name="phone"
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
           <FormGroup
             label="Username"
             type="text"
@@ -80,6 +142,7 @@ const AuthPage = () => {
           </div>
         </form>
       ) : (
+        // Login View
         <form onSubmit={handleLogin}>
           <FormGroup
             label="Username"
@@ -106,7 +169,7 @@ const AuthPage = () => {
             Login
           </button>
           <div className="forgot-password">
-            <a href="#">Forgot Password?</a> {/* Forgot Password Link */}
+            <a onClick={() => setIsForgotPassword(true)}>Forgot Password?</a> {/* Trigger Forgot Password */}
           </div>
           <div className="create-account">
             <a onClick={() => setShowRegister(true)}>Don't have an Account?</a>
@@ -118,5 +181,10 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
+
+
+
+
+
 
 
