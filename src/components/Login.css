@@ -94,5 +94,22 @@ form {
   text-decoration: underline;
 }
 
+/* Ensure numbers are clearly visible in the country dropdown */
+.iti__country-list .iti__dial-code {
+  color: black !important; /* Make sure the dial codes (numbers) are black */
+}
+
+.iti__country-list {
+  background-color: white;
+  color: black; /* Make sure the background is white for visibility */
+}
+
+/* General input styling */
+.form-group input[type="tel"] {
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
 
 
