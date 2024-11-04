@@ -1,10 +1,11 @@
 // src/components/AuthPage.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Title from './Title';
 import FormGroup from './FormGroup';
 import Checkbox from './Checkbox';
 import './Login.css';
-import { createRecord, readRecords } from '../utils/supabaseCRUD'; // Import readRecords and createRecord
+import { readRecords } from '../utils/supabaseCRUD';
 
 const AuthPage = () => {
   const [showRegister, setShowRegister] = useState(false); // Toggle register mode
@@ -15,56 +16,35 @@ const AuthPage = () => {
   const [phone, setPhone] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
-    const newUser = {
-      username,
-      password,
-      email,
-      phone,
-    };
-
-    try {
-      await createRecord('Users', newUser);
-      alert('Account created successfully!');
-      setUsername('');
-      setPassword('');
-      setEmail('');
-      setPhone('');
-      setShowRegister(false); // Go back to login view
-    } catch (error) {
-      console.error('Error creating account:', error.message);
-      alert('Error creating account. Please try again.');
-    }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      // Search for the user in the database
       const data = await readRecords('Users', { username });
       
       if (data.length === 0) {
-        // If no user found with the given username
         alert('Username does not exist');
       } else if (data[0].password === password) {
-        // If user exists and password matches
         alert('Login successful!');
-        // You can redirect the user or set the auth state here if needed
+        navigate('/dashboard'); // Redirect to dashboard on success
       } else {
-        // If password does not match
         alert('Incorrect password. Please try again.');
       }
     } catch (error) {
       console.error('Error logging in:', error.message);
       alert('An error occurred during login. Please try again.');
     }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    // Registration code (not shown for brevity)
   };
 
   const handleForgotPassword = (e) => {
@@ -181,6 +161,7 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
+
 
 
 

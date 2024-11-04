@@ -1,25 +1,22 @@
 // src/App.jsx
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AuthPage from './components/AuthPage';
-import ConnectionTest from './components/ConnectionTest';
 import UserDashboard from './components/UserDashboard';
 
-const App = () => {
-  return <UserDashboard />;
-
-
-};
-
-/*
+function App() {
   return (
-    <div>
-      <h1>My App</h1>
-      <ConnectionTest /> {/* This will run the test }
-      </div>
-      );
-*/
+    <Router>
+      <Routes>
+        <Route path="/" element={<AuthPage />} /> {/* Login page as the default route */}
+        <Route path="/dashboard" element={<UserDashboard />} /> {/* Dashboard route */}
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
+
 
 
 
