@@ -1,7 +1,7 @@
 // src/utils/supabaseCRUD.js
-import supabase from '../config/supabaseClient';
+import supabase from '../config/supabaseClient'; // Default import, no curly braces
 
-// CREATE: Add a new record
+// CRUD functions
 export const createRecord = async (table, data) => {
   const { data: createdData, error } = await supabase.from(table).insert([data]);
   if (error) {
@@ -11,7 +11,6 @@ export const createRecord = async (table, data) => {
   return createdData;
 };
 
-// READ: Get records from a table (with optional filtering)
 export const readRecords = async (table, filter = {}) => {
   const { data, error } = await supabase.from(table).select('*').match(filter);
   if (error) {
@@ -21,7 +20,6 @@ export const readRecords = async (table, filter = {}) => {
   return data;
 };
 
-// UPDATE: Update a record by its ID or any other unique identifier
 export const updateRecord = async (table, id, updatedData) => {
   const { data, error } = await supabase.from(table).update(updatedData).match({ id });
   if (error) {
@@ -31,7 +29,6 @@ export const updateRecord = async (table, id, updatedData) => {
   return data;
 };
 
-// DELETE: Delete a record by its ID or any other unique identifier
 export const deleteRecord = async (table, id) => {
   const { data, error } = await supabase.from(table).delete().match({ id });
   if (error) {

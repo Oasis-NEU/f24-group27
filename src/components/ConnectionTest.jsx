@@ -1,6 +1,6 @@
 // src/components/ConnectionTest.jsx
 import React, { useEffect } from 'react';
-import { supabase } from '../config/supabaseClient';
+import supabase from '../config/supabaseClient'; // No curly braces for default import
 
 const ConnectionTest = () => {
   useEffect(() => {
