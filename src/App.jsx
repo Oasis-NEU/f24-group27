@@ -2,9 +2,10 @@
 import React from 'react';
 import AuthPage from './components/AuthPage';
 import ConnectionTest from './components/ConnectionTest';
+import UserDashboard from './components/UserDashboard';
 
 const App = () => {
-  return <AuthPage />;
+  return <UserDashboard />;
 
 
 };

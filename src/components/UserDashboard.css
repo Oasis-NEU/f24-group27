@@ -1,0 +1,186 @@
+/* src/components/UserDashboard.css */
+
+/* Container Styling */
+.dashboard-container {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #f9f9f9; /* Light gray background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-container h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Main Buttons Styling */
+.dashboard-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 30px;
+  margin: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+.dashboard-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Create Group Section Styling */
+.create-group-section, .join-group-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-group-section h2, .join-group-section h2 {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+/* Input Fields */
+.player-field input,
+.group-name input {
+  width: calc(100% - 40px);
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.player-field input:focus,
+.group-name input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Player Field Row Styling */
+.player-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.remove-player-btn {
+  background-color: #e74c3c; /* Red button for delete */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-left: 10px;
+  transition: background-color 0.3s;
+}
+
+.remove-player-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Add Player Button */
+.add-player-btn {
+  background-color: #28a745; /* Green button for adding players */
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-player-btn:hover {
+  background-color: #218838;
+}
+
+/* Checkbox Styling */
+.checkbox-group {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group label {
+  margin-left: 8px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Submit Button */
+.submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Group List Styling for Join Section */
+.group-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  transition: background-color 0.3s;
+}
+
+.group-item:hover {
+  background-color: #f0f0f0;
+}
+
+.group-item span {
+  font-size: 1rem;
+  color: #333;
+}
+
+.join-group-btn {
+  background-color: #17a2b8; /* Teal color for join button */
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.join-group-btn:hover {
+  background-color: #138496;
+}
