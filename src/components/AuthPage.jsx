@@ -4,7 +4,7 @@ import Title from './Title';
 import FormGroup from './FormGroup';
 import Checkbox from './Checkbox';
 import './Login.css';
-import { createRecord } from '../utils/supabaseCRUD'; // Import the createRecord function
+import { createRecord, readRecords } from '../utils/supabaseCRUD'; // Import readRecords and createRecord
 
 const AuthPage = () => {
   const [showRegister, setShowRegister] = useState(false); // Toggle register mode
@@ -19,28 +19,19 @@ const AuthPage = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    alert(`Logged in with Username: ${username}`);
-  };
-
   const handleRegister = async (e) => {
     e.preventDefault();
-  
+
     const newUser = {
       username,
       password,
       email,
       phone,
     };
-  
+
     try {
-      // Try creating a new user in the 'Users' table
       await createRecord('Users', newUser);
-      
       alert('Account created successfully!');
-      
-      // Clear form fields after successful registration
       setUsername('');
       setPassword('');
       setEmail('');
@@ -51,7 +42,31 @@ const AuthPage = () => {
       alert('Error creating account. Please try again.');
     }
   };
-  
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Search for the user in the database
+      const data = await readRecords('Users', { username });
+      
+      if (data.length === 0) {
+        // If no user found with the given username
+        alert('Username does not exist');
+      } else if (data[0].password === password) {
+        // If user exists and password matches
+        alert('Login successful!');
+        // You can redirect the user or set the auth state here if needed
+      } else {
+        // If password does not match
+        alert('Incorrect password. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error.message);
+      alert('An error occurred during login. Please try again.');
+    }
+  };
+
   const handleForgotPassword = (e) => {
     e.preventDefault();
     alert(`Password reset link sent to: ${email}`);
@@ -166,7 +181,6 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
-
 
 
 
