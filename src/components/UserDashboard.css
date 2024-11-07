@@ -53,15 +53,31 @@
 }
 
 /* Input Fields */
-.player-field input,
 .group-name input {
-  width: calc(100% - 40px);
+  width: calc(100% - 50px);
   padding: 10px;
   margin-top: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
   transition: border-color 0.3s;
+  background-color: rgb(233, 227, 227);
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.player-field input {
+  width: calc(100% - 50px);
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  background-color: rgb(233, 227, 227);
+  color: black;
+
 }
 
 .player-field input:focus,
@@ -76,6 +92,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 5px 0;
+
 }
 
 .remove-player-btn {
@@ -184,3 +201,21 @@
 .join-group-btn:hover {
   background-color: #138496;
 }
+
+/* Player List Container */
+.player-list-container {
+  max-height: 300px; /* Set a max height for the container */
+  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+  padding-right: 10px; /* Optional: space for scrollbar */
+  margin-top: 10px;
+}
+
+.player-list-container::-webkit-scrollbar {
+  width: 8px; /* Customize scrollbar width */
+}
+
+.player-list-container::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Customize scrollbar color */
+  border-radius: 4px;
+}
+

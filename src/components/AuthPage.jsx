@@ -32,7 +32,7 @@ const AuthPage = () => {
         alert('Username does not exist');
       } else if (data[0].password === password) {
         alert('Login successful!');
-        navigate('/dashboard'); // Redirect to dashboard on success
+        navigate('/dashboard', { state: { loggedInUsername: username } });// Redirect to dashboard on success
       } else {
         alert('Incorrect password. Please try again.');
       }
