@@ -173,7 +173,7 @@ const UserDashboard = ({ loggedInUsername }) => {
                 <label>Player {player.id}:</label>
                 <input
                   type="text"
-                  placeholder="Player Name"
+                  placeholder="Player Username"
                   value={player.name}
                   onChange={(e) => handlePlayerChange(player.id, e.target.value)}
                 />
